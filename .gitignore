@@ -1,0 +1,11 @@
+# Generated test report
+report.html
+
+# Screenshots captured during test runs
+*.png
+
+# Node.js
+node_modules/
+
+# OS files
+.DS_Store
