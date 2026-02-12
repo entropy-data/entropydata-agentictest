@@ -96,6 +96,38 @@ Run in headless mode. At the end, generate an HTML test report.
    - Verify the data product was created
    - Check console for JS errors and inspect for visual bugs
 
+## Tests 4-6: Exploratory UI Tests (Dynamic)
+
+After completing the predefined tests above, explore the application UI and **choose 3 additional use cases to test on your own**. These must NOT be the same as Tests 1-3 above.
+
+**How to choose:**
+1. Navigate around the application — open menus, sidebars, navigation links, settings, and any other areas visible in the UI
+2. Take a screenshot of the main areas you discover
+3. Based on what you see, pick 3 distinct use cases that exercise different parts of the application
+4. **Vary your choices** — each time this test suite runs, try to pick different use cases so that over time broad coverage is achieved. Do not follow a fixed pattern.
+
+**For each of the 3 exploratory tests:**
+- Give it a descriptive name (e.g., "Test 4: [Your chosen use case]")
+- Document what you are testing and why you chose it
+- Interact with the feature: click buttons, fill forms, navigate pages, trigger actions
+- Take screenshots at each step
+- Check console for JS errors and inspect for visual bugs after each step
+- Record the result (PASS/FAIL) with notes on what happened
+
+**Examples of things you might test** (do NOT always pick these — explore and find your own):
+- Filtering or sorting data products
+- Navigating to a data contract detail page and reviewing its contents
+- Editing an existing data product or data contract
+- Checking responsiveness or layout of a specific page
+- Testing pagination if there are lists
+- Exploring settings or profile pages
+- Testing breadcrumb navigation
+- Checking empty states (e.g., searching for something that doesn't exist)
+- Testing any dialogs, modals, or tooltips you encounter
+- Verifying links and navigation flows
+
+Include all exploratory test results in the final report alongside Tests 1-3.
+
 ## Report Generation
 
 After completing ALL tests (whether they passed or failed), create an HTML report file at `report.html` in the current working directory. The report must include:
