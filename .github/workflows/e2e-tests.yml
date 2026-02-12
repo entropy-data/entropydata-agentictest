@@ -32,7 +32,7 @@ jobs:
 
       - name: Run E2E tests
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           chmod +x run-test.sh
           # Run tests; capture exit code but don't fail yet so we can parse the report

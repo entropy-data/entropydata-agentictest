@@ -18,12 +18,15 @@ Claude Code acts as an AI test agent that drives a headless browser via Playwrig
 
 - [Node.js](https://nodejs.org/) v22+
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
-- An Anthropic API key
+- A Claude Max/Pro subscription (or an Anthropic API key)
 
 ### Running Tests Locally
 
 ```bash
-export ANTHROPIC_API_KEY="your-api-key-here"
+# Authenticate with your Claude Max/Pro plan
+claude login
+
+# Then run the tests
 chmod +x run-test.sh
 ./run-test.sh
 ```
@@ -41,25 +44,36 @@ The workflow at `.github/workflows/e2e-tests.yml` runs the tests:
 
 ### Configuring GitHub Secrets
 
-The CI pipeline requires one secret: **`ANTHROPIC_API_KEY`**.
+The CI pipeline requires one secret: **`CLAUDE_CODE_OAUTH_TOKEN`** (from your Claude Max/Pro subscription).
 
-#### Step-by-step
+#### Automatic setup (recommended)
 
-1. **Get an Anthropic API key**
-   - Go to [console.anthropic.com](https://console.anthropic.com/)
-   - Sign in or create an account
-   - Navigate to **API Keys** in the sidebar
-   - Click **Create Key**, give it a name (e.g. `entropy-e2e-tests`), and copy the key
+A helper script is included that reads your local Claude credentials and uploads the OAuth token as a GitHub secret:
 
-2. **Add the secret to your GitHub repository**
+```bash
+# Make sure you're logged in to both Claude and GitHub CLI
+claude login
+gh auth login
+
+# Push the token to GitHub
+./update-oauth-secret.sh
+```
+
+**Important**: OAuth tokens expire after ~1 day. Re-run `./update-oauth-secret.sh` to refresh the token before scheduled CI runs.
+
+#### Manual setup
+
+1. **Log in to Claude Code** locally: `claude login`
+2. **Find your OAuth token**:
+   - macOS: stored in Keychain under `claude-code-credentials`
+   - Linux: stored in `~/.claude/.credentials.json` (the `oauthToken` field)
+3. **Add the secret to GitHub**:
    - Go to your repository on GitHub
    - Navigate to **Settings** > **Secrets and variables** > **Actions**
    - Click **New repository secret**
-   - Name: `ANTHROPIC_API_KEY`
-   - Value: paste your Anthropic API key
+   - Name: `CLAUDE_CODE_OAUTH_TOKEN`
+   - Value: paste your OAuth token
    - Click **Add secret**
-
-That's it. The workflow will pick up the secret automatically on the next run.
 
 ### CI Artifacts
 
@@ -84,5 +98,6 @@ Test results are printed directly in the GitHub Actions log so you can see pass/
 ├── mcp-config.json                    # Playwright MCP server config
 ├── prompt.md                          # Test scenario definitions
 ├── run-test.sh                        # Test runner script
+├── update-oauth-secret.sh             # Push OAuth token to GitHub secrets
 └── README.md
 ```
