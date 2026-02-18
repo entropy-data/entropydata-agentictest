@@ -1,11 +1,20 @@
 # Generated test report
 report.html
 
+# Generated bug reports
+bugs/
+
 # Screenshots captured during test runs
-*.png
+screenshots/
 
 # Node.js
 node_modules/
 
 # OS files
 .DS_Store
+
+# Playwright MCP
+.playwright-mcp/
+
+# Claude Code
+.claude/
